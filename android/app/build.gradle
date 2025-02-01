@@ -76,6 +76,10 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
+        lintOptions {
+        warningsAsErrors false
+        disable 'Deprecation'
+    }
 
     namespace "com.saylanimicrofinanceapp"
     defaultConfig {
@@ -117,3 +121,4 @@ dependencies {
         implementation jscFlavor
     }
 }
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
