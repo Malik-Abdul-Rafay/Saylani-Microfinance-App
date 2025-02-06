@@ -147,7 +147,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
               <Text style={styles.featureTitle}>Output:</Text>
               <Text>{JSON.stringify(loanResult)}</Text>   
             </View>
-          )}
+          )} 
         </View> 
       </ScrollView> 
 
