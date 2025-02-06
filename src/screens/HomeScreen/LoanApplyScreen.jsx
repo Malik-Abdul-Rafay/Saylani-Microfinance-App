@@ -149,7 +149,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
             </View>
           )}
         </View> 
-      </ScrollView>
+      </ScrollView> 
 
       <Modal  
         visible={showModal}
