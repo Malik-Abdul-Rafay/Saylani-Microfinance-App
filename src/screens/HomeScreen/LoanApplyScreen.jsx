@@ -145,7 +145,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
           {loanResult && (
             <View style={styles.resultContainer}>
               <Text style={styles.featureTitle}>Output:</Text>
-              <Text>{JSON.stringify(loanResult)}</Text>  
+              <Text>{JSON.stringify(loanResult)}</Text>   
             </View>
           )}
         </View>
