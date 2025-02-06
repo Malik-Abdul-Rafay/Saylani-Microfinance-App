@@ -152,7 +152,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
       </ScrollView>   
       
       <Modal  
-        visible={showModal} 
+        visible={showModal}  
         animationType="slide"
         transparent={true}
         onRequestClose={() => setShowModal(false)}
