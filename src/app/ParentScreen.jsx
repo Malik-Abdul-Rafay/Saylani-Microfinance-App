@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreenHeader from '../components/HomeScreenHeader';
 import LabelHeader from '../components/LabelHeader';
-import HomeScreen from '../screens/HomeScreen';
 import LoansScreen from '../screens/LoansScreen';
 import ChatScreen from '../screens/ChatScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import HomeScreenLayout from '../screens/HomeScreen/HomeScreenLayout';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,8 +48,8 @@ const ParentScreen = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
-        options={{ header: () => <HomeScreenHeader /> }}
+        component={HomeScreenLayout}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Loan"

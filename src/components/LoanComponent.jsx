@@ -1,78 +1,102 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 
 const LoanComponent = () => {
+  const [loanCategories, setLoanCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
+
+
+  useEffect(() => {
+    const fetchLoanCategories = async () => {
+      try { 
+        const response = await axios.get('http://192.168.2.103:8000/loan_categories');
+        setLoanCategories(response.data.loan_categories);
+        console.log(loanCategories); 
+      } catch (error) {
+        console.log('Error fetching loan categories:', error);
+      } finally {  
+        setLoading(false);
+      }
+    };
+
+    fetchLoanCategories();
+  }, []);
+
+  const convertToMonths = (value) => {
+    return Math.round(value * 12);
+  };
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#007bff" />
+        <Text style={styles.loadingText}>Loading...</Text>
+      </View>
+    );
+  }
+
+
   return (
     <View style={styles.container}>
-      {/* Eligible Loan Section */}
       <Text style={styles.sectionHeader}>Eligible Loan</Text>
+      {loanCategories
+  .filter((category) => category.status === "eligible")
+  .map((category) => (
+    <View style={styles.loanBox} key={category._id}>
+      <Text style={styles.loanTitle}>{category.name}</Text>
+      <Text style={styles.loanAmount}>
+        Up to RS. {category.max_loan.toLocaleString('en-PK')}
+      </Text>
+      <TouchableOpacity 
+        onPress={() => navigation.navigate('LoanApply', { categoryDetail: category })}  // Pass category details
+        style={styles.applyButton}
+      >
+        <Text style={styles.applyButtonText}>Apply Now</Text>
+      </TouchableOpacity>
+      <Text style={styles.tenure}>
+        Tenure up to {convertToMonths(category.max_period)} months
+      </Text>
+    </View>
+  ))}
 
-      {/* Quick Loan - Salaried */}
-      <View style={styles.loanBox}>
-        <Text style={styles.loanTitle}>Quick Loan - Salaried</Text>
-        <Text style={styles.loanAmount}>Up to $5000/-</Text>
-        <TouchableOpacity style={styles.applyButton}>
-          <Text style={styles.applyButtonText}>Apply Now</Text>
-        </TouchableOpacity>
-        <Text style={styles.tenure}>Tenure up to 30 days</Text>
-      </View>
 
-      {/* Personal Loan - Salaried */}
-      <View style={styles.loanBox}>
-        <Text style={styles.loanTitle}>Personal Loan - Salaried</Text>
-        <Text style={styles.loanAmount}>Up to $10,000/-</Text>
-        <TouchableOpacity style={styles.applyButton}>
-          <Text style={styles.applyButtonText}>Apply Now</Text>
-        </TouchableOpacity>
-        <Text style={styles.tenure}>Tenure up to 24 months</Text>
-      </View>
-      <View style={styles.alertText}>
-      <View style={styles.alertBox}>
-        <View style={styles.alertContent}>
-          <View>
-            <View style={styles.alertAndCloseCon}>
-          <Text style={styles.alertText1}>
-            Alert!
-          </Text>
-          <TouchableOpacity>
-          <Icon name="close" size={23} color="red" />
-        </TouchableOpacity>
-        </View>
-          <Text style={styles.alertText2}>
-            Please kindly complete your video e-kyc to apply quick loans.
-          </Text>
+        <View style={styles.alertBox}>
+          <View style={styles.alertContent}>
+            <View>
+              <View style={styles.alertAndCloseCon}>
+                <Text style={styles.alertText1}>Alert!</Text>
+                <TouchableOpacity>
+                  <Icon name="close" size={23} color="red" />
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.alertText2}>
+                Please kindly complete your video e-kyc to apply quick loans.
+              </Text>
+            </View>
           </View>
         </View>
-   
-      </View>
-
-      </View>
-
-
-      {/* Upcoming Loan Section */}
       <Text style={styles.sectionHeader}>Upcoming Loan</Text>
-
-      {/* Personal Loan - Salaried */}
-      <View style={styles.loanBox}>
-        <Text style={styles.loanTitle}>Personal Loan - Salaried</Text>
-        <Text style={styles.loanAmount}>Up to $5,00,000</Text>
-        <TouchableOpacity style={styles.applyButton}>
-          <Text style={styles.applyButtonText}>Apply Now</Text>
-        </TouchableOpacity>
-        <Text style={styles.tenure}>Tenure up to 48 months</Text>
-      </View>
-
-      {/* Business Loan */}
-      <View style={styles.loanBox}>
-        <Text style={styles.loanTitle}>Business Loan</Text>
-        <Text style={styles.loanAmount}>Up to $8,00,000</Text>
-        <TouchableOpacity style={styles.applyButton}>
-          <Text style={styles.applyButtonText}>Apply Now</Text>
-        </TouchableOpacity>
-        <Text style={styles.tenure}>Tenure up to 60 months</Text>
-      </View>
+      {loanCategories
+  .filter((category) => category.status === "upcoming")
+  .map((category) => (
+      <View style={styles.loanBox} key={category._id}>
+      <Text style={styles.loanTitle}>{category.name}</Text>
+      <Text style={styles.loanAmount}>
+  Up to RS. {category.max_loan.toLocaleString('en-PK')}
+</Text>
+      <TouchableOpacity style={styles.applyButton}>
+        <Text style={styles.applyButtonText}>Apply Now</Text>
+      </TouchableOpacity>
+      <Text style={styles.tenure}>
+      Tenure up to {convertToMonths(category.max_period)} months
+      </Text>
+    </View>
+      ))} 
     </View>
   );
 };
@@ -81,6 +105,18 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     backgroundColor: '#eaeaea',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 18,
+    color: '#007bff',
+    fontFamily: 'Sen-Bold',
   },
   sectionHeader: {
     fontSize: 20,
@@ -94,19 +130,30 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     marginBottom: 16,
-    backgroundColor:'#FFF'
+    backgroundColor: '#FFF',
   },
   loanTitle: {
-    fontSize: 16,
+    fontSize: 17,
     color: '#000000',
     marginBottom: 8,
     fontFamily: 'Sen-SemiBold',
   },
   loanAmount: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#007bff',
     marginBottom: 8,
     fontFamily: 'Sen-SemiBold',
+  },
+  tenure: {
+    fontSize: 15,
+    color: '#666666',
+    fontFamily: 'Sen-SemiBold',
+  },
+  subcategoryText: {
+    fontSize: 14,
+    color: '#333',
+    marginVertical: 4,
+    fontFamily: 'Sen-Regular',
   },
   applyButton: {
     backgroundColor: '#007bff',
@@ -119,11 +166,6 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 16,
     fontFamily: 'Sen-Bold',
-  },
-  tenure: {
-    fontSize: 15,
-    color: '#666666',
-    fontFamily: 'Sen-SemiBold',
   },
   alertBox: {
     backgroundColor: 'rgba(255, 0, 0, 0.1)',
@@ -141,13 +183,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
   },
-  alertIcon: {
-    marginRight: 8,
-  },
-  alertAndCloseCon:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between'
+  alertAndCloseCon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   alertText1: {
     fontSize: 18,
@@ -160,7 +199,7 @@ const styles = StyleSheet.create({
     color: '#ff0000',
     fontFamily: 'Sen-Medium',
     flexShrink: 1,
-    paddingTop: 3
+    paddingTop: 3,
   },
 });
 
