@@ -5,7 +5,7 @@ import img from '../../assets/images/logo.png'
      
 const SplashScreen = () => {  
   const navigation = useNavigation()   
-  useEffect(() => {
+  useEffect(() => { 
     const timer = setTimeout(() => {
       navigation.replace('Parent'); 
     }, 2000)
