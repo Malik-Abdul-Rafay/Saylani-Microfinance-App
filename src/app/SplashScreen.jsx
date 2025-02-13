@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import img from '../../assets/images/logo.png'    
     
 const SplashScreen = () => { 
-  const navigation = useNavigation()  
+  const navigation = useNavigation()   
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.replace('Parent'); 
