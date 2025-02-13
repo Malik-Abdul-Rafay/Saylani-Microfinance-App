@@ -5,6 +5,8 @@ import Slider from '@react-native-community/slider';
 import Icon1 from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon3 from 'react-native-vector-icons/AntDesign';
+import { Picker } from '@react-native-picker/picker';
+
 
 const LoanApplyScreen = ({ route, navigation }) => {
   const { categoryDetail } = route.params;
@@ -15,6 +17,8 @@ const LoanApplyScreen = ({ route, navigation }) => {
   const [initialDeposit, setInitialDeposit] = useState('0');
   const [modalSearchQuery, setModalSearchQuery] = useState('');
   const [loanResult, setLoanResult] = useState(null);
+  const [loanTenure, setLoanTenure] = useState(7);
+
 
   const handleItemSelect = (item) => {
     setSearchQuery(item);
@@ -41,26 +45,35 @@ const LoanApplyScreen = ({ route, navigation }) => {
     return () => clearTimeout(timeoutId);
   }, [loanAmount]);
 
+  const convertToMonths = (value) => {
+    return Math.round(value * 12);
+  };
+  const convertToYear = (value) => {
+    return value / 12;
+  };
   const handleCalculate = async () => {
+    
     const data = {
       category_id: parseInt(categoryDetail._id),
       subcategory: searchQuery,
       loan_amount: parseFloat(loanAmount),
       initial_deposit: parseFloat(initialDeposit),
-      loan_period: parseFloat('2'),
+      loan_period: parseFloat(convertToYear(loanTenure)),
     };
 
     try {
       const response = await axios.post('http://192.168.2.103:8000/calculate_loan', data);
       setLoanResult(response.data);
+      console.log(response.data);
+      
     } catch (error) {
-      console.error('Error calculating loan:', error);
-      console.log(data);
-      console.log(categoryDetail);
+      console.error(error);
+      console.error("Ye Raha",response.data);
       
-      
+     
     }
   };
+
 
   return (
     <>
@@ -136,6 +149,25 @@ const LoanApplyScreen = ({ route, navigation }) => {
                 <Icon3 name="edit" size={20} color="#000" />
               </View>
             </View>
+
+
+            <View style={styles.loanBox2}>
+
+            <View style={styles.tenureContainer}>
+    <Text style={styles.tenureLabel}>Select Loan Tenure (Months):</Text>
+    <Picker
+      selectedValue={loanTenure}
+      style={styles.picker}
+      onValueChange={(itemValue) => setLoanTenure(itemValue)}
+    >
+      {[...Array(convertToMonths(categoryDetail.max_period))].map((_, index) => (
+        <Picker.Item key={index} label={`${index + 1} Month`} value={index + 1} />
+      ))}
+    </Picker>
+  </View>
+</View>
+
+
           </View>
 
           <TouchableOpacity style={styles.button} onPress={handleCalculate}>
@@ -143,11 +175,25 @@ const LoanApplyScreen = ({ route, navigation }) => {
           </TouchableOpacity>
 
           {loanResult && (
-            <View style={styles.resultContainer}>
-              <Text style={styles.featureTitle}>Output:</Text>
-              <Text>{JSON.stringify(loanResult)}</Text>   
-            </View>
-          )} 
+  <View style={styles.resultContainer}>
+    <Text style={styles.resultTitle}>Loan Calculation Result</Text>
+    <View style={styles.resultBox}>
+      <View style={styles.resultRow}>
+        <Text style={styles.resultLabel}>Total Loan:</Text>
+        <Text style={styles.resultValue}>Rs. {loanResult.total_loan.toFixed(2)}/-</Text>
+      </View>
+      <View style={styles.resultRow}>
+        <Text style={styles.resultLabel}>Monthly:</Text>
+        <Text style={styles.resultValue}>Rs. {loanResult.monthly_payment.toFixed(2)}/-</Text>
+      </View>
+      <View style={styles.resultRow}>
+        <Text style={styles.resultLabel}>Total:</Text>
+        <Text style={styles.resultValue}>Rs. {loanResult.total_payment.toFixed(2)}/-</Text>
+      </View>
+    </View>
+  </View>
+)}
+
         </View>   
       </ScrollView>   
       
@@ -251,10 +297,9 @@ const styles = StyleSheet.create({
   card: { backgroundColor: 'white', paddingVertical: 20, paddingHorizontal: 15, borderRadius: 15 },
   title: { fontSize: 21, fontFamily: 'Sen-Bold', color: '#333', textAlign: 'center' },
   amount: { fontSize: 30, fontFamily: 'Sen-Bold', color: '#0066B3', marginVertical: 5 },
-  loanBox: { marginVertical: 15, alignItems: 'center' },
   loanText: { fontSize: 16, color: '#666', fontFamily: 'Sen-Medium' },
   loanAmount: { fontSize: 26, fontFamily: 'Sen-Bold', color: '#0066B3', marginVertical: 5 },
-  featureTitle: { fontSize: 19, fontFamily: 'Sen-Bold', marginTop: 20 },
+  featureTitle: { fontSize: 19, fontFamily: 'Sen-Bold',},
   button: { backgroundColor: '#0066B3', paddingVertical: 12, borderRadius: 10, alignItems: 'center', marginTop: 18 },
   buttonText: { color: 'white', fontSize: 18, fontFamily: 'Sen-Bold' },
   inputContainer: {
@@ -380,9 +425,75 @@ const styles = StyleSheet.create({
   resultContainer: {
     marginTop: 20,
     padding: 15,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 8,
+    backgroundColor: '#E3F2FD',
+    borderRadius: 10,
   },
+  resultTitle: {
+    fontSize: 18,
+    fontFamily: 'Sen-Bold',
+    color: '#0066B3',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  resultBox: {
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  resultRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  resultLabel: {
+    fontSize: 16,
+    fontFamily: 'Sen-Medium',
+    color: '#333',
+  },
+  resultValue: {
+    fontSize: 16,
+    fontFamily: 'Sen-Bold',
+    color: '#0066B3',
+  },
+  loanBox: { marginVertical: 15, alignItems: 'center' },
+  loanBox2: {
+    paddingHorizontal: 15,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 20
+  },
+  tenureContainer: {
+    marginVertical: 10,
+  },
+  tenureLabel: {
+    fontSize: 16,
+    fontFamily: 'Sen-Bold',
+    fontWeight: '500',
+    color: '#333',
+    marginBottom: 8,
+    borderRadius: 20
+
+  },
+  picker: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    paddingLeft: 10,
+    backgroundColor: '#fff',
+
+
+  },
+
+  
+
+  
+
 });
 
 export default LoanApplyScreen;

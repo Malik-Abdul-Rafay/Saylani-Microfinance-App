@@ -88,6 +88,11 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-Wno-dollar-in-identifier-extension"
+            }
+        }
     }
     signingConfigs {
         debug {

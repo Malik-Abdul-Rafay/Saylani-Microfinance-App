@@ -3,8 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './HomeScreen';
 import LoanApplyScreen from './LoanApplyScreen';
 
+const Stack = createStackNavigator();
 const HomeScreenLayout = () => {
-    const Stack = createStackNavigator();
   return (
     <Stack.Navigator>
       <Stack.Screen name="HomeScreen" component={HomeScreen}  options={{ headerShown: false }} />

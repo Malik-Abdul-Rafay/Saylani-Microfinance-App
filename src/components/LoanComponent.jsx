@@ -35,7 +35,6 @@ const LoanComponent = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#007bff" />
-        <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
   }
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    marginTop: 90
   },
   loadingText: {
     marginTop: 10,

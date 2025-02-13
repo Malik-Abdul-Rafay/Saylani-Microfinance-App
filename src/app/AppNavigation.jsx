@@ -6,8 +6,8 @@ import LoginScreen from '../screens/LoginScreen';
 import BackHeader from '../components/BackHeader';
 import RegisterScreen from '../screens/RegisterScreen';
 
+const Stack = createStackNavigator();
 const AppNavigation = () => {
-    const Stack = createStackNavigator();
   return (
     <Stack.Navigator>
       <Stack.Screen name="Splash" component={SplashScreen}  options={{ headerShown: false }} />
