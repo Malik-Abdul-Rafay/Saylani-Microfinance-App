@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, StatusBar, Image } from 'react-native'
-import React, { useEffect } from 'react' 
+import React, { useEffect } from 'react'  
 import { useNavigation } from '@react-navigation/native'     
 import img from '../../assets/images/logo.png'     
     
