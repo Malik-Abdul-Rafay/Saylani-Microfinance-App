@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'     
 import img from '../../assets/images/logo.png'      
      
-const SplashScreen = () => {  
+const SplashScreen = () => {   
   const navigation = useNavigation()   
   useEffect(() => { 
     const timer = setTimeout(() => {
