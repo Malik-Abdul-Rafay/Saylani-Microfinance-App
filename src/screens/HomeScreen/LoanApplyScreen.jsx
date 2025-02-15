@@ -59,7 +59,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
       loan_amount: parseFloat(loanAmount), 
       initial_deposit: parseFloat(initialDeposit),  
       loan_period: parseFloat(convertToYear(loanTenure)),   
-    };     
+    };      
   
     try { 
       const response = await axios.post('http://192.168.253.122:8000/calculate_loan', data);
