@@ -14,7 +14,7 @@ const LoanComponent = () => {
   useEffect(() => {
     const fetchLoanCategories = async () => {
       try { 
-        const response = await axios.get('http://192.168.2.103:8000/loan_categories');
+        const response = await axios.get('http://192.168.253.122:8000/loan_categories');
         setLoanCategories(response.data.loan_categories);
         console.log(loanCategories); 
       } catch (error) {

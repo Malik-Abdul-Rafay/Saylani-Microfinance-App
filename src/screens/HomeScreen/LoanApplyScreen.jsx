@@ -62,7 +62,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
     };
 
     try {
-      const response = await axios.post('http://192.168.2.103:8000/calculate_loan', data);
+      const response = await axios.post('http://192.168.253.122:8000/calculate_loan', data);
       setLoanResult(response.data);
       console.log(response.data);
       
