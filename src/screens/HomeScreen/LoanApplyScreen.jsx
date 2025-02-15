@@ -56,7 +56,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
     const data = {
       category_id: parseInt(categoryDetail._id),  
       subcategory: searchQuery,  
-      loan_amount: parseFloat(loanAmount), 
+      loan_amount: parseFloat(loanAmount),  
       initial_deposit: parseFloat(initialDeposit),  
       loan_period: parseFloat(convertToYear(loanTenure)),   
     };      
