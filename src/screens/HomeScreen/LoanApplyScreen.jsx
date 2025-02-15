@@ -54,7 +54,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
   const handleCalculate = async () => {
     
     const data = {
-      category_id: parseInt(categoryDetail._id), 
+      category_id: parseInt(categoryDetail._id),  
       subcategory: searchQuery,  
       loan_amount: parseFloat(loanAmount), 
       initial_deposit: parseFloat(initialDeposit),  
