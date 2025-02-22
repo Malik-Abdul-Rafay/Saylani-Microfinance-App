@@ -15,6 +15,6 @@ const AppNavigation = () => {
       <Stack.Screen name="Parent" component={ParentScreen} options={{ headerShown: false }} />
     </Stack.Navigator>   
   );     
-};
+}; 
  
 export default AppNavigation;   
