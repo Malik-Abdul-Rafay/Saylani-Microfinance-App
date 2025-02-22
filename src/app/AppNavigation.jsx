@@ -13,7 +13,7 @@ const AppNavigation = () => {
       <Stack.Screen name="SignIn" component={LoginScreen}  options={{ headerShown: false }} />
       <Stack.Screen name="SignUp" component={RegisterScreen}  options={{ headerShown: false }} />
       <Stack.Screen name="Parent" component={ParentScreen} options={{ headerShown: false }} />
-    </Stack.Navigator>
+    </Stack.Navigator> 
   );   
 };
 
