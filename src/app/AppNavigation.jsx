@@ -16,5 +16,5 @@ const AppNavigation = () => {
     </Stack.Navigator> 
   );     
 };
-
+ 
 export default AppNavigation;  
