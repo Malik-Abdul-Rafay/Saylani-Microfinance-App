@@ -14,7 +14,7 @@ const AppNavigation = () => {
       <Stack.Screen name="SignUp" component={RegisterScreen}  options={{ headerShown: false }} />
       <Stack.Screen name="Parent" component={ParentScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
-  );  
+  );   
 };
 
 export default AppNavigation;
