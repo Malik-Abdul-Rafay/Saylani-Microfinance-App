@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
 import Icon2 from 'react-native-vector-icons/Ionicons';
-import LoanComponent from '../../components/LoanComponent';
-import HomeScreenHeader from '../../components/HomeScreenHeader';
+// import LoanComponent from '../../components/LoanComponent';
+// import HomeScreenHeader from '../../components/HomeScreenHeader';
 
 const HomeScreen = ({navigation}) => {
   return (
     <>
-    <HomeScreenHeader />
+    {/* <HomeScreenHeader /> */}
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor="#0066B3" barStyle="light-content" />
 
@@ -32,7 +32,7 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <LoanComponent />
+      {/* <LoanComponent /> */}
 
     </ScrollView>
     </>
