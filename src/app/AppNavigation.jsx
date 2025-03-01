@@ -3,7 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';                                      
 import SplashScreen from './SplashScreen';         
 import ParentScreen from './ParentScreen';    
-import LoginScreen from '../screens/LoginScreen';         
+import LoginScreen from '../screens/LoginScreen';          
 import RegisterScreen from '../screens/RegisterScreen';    
     
 const Stack = createStackNavigator(); 
