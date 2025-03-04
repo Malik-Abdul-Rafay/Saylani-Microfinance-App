@@ -6,7 +6,7 @@ import ParentScreen from './ParentScreen';
 import LoginScreen from '../screens/LoginScreen';             
 import RegisterScreen from '../screens/RegisterScreen';           
                
- 
+  
 const Stack = createStackNavigator();    
 const AppNavigation = () => {     
   return (   
