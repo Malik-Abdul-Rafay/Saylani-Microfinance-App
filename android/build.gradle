@@ -1,11 +1,15 @@
 buildscript {
     ext {
-        buildToolsVersion = "35.0.0"
+        buildToolsVersion = "36.0.0-rc5" 
         minSdkVersion = 24
         compileSdkVersion = 35
         targetSdkVersion = 34
-        ndkVersion = "27.1.12297006"
+        ndkVersion = "28.0.13004108"
         kotlinVersion = "2.0.21"
+
+            react = [
+            enableHermes: false // Set to true if you want Hermes
+        ]
     }
     repositories {
         google()
