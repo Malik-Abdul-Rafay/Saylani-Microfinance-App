@@ -9,7 +9,7 @@ import SystemNavigationBar from 'react-native-system-navigation-bar';
     
 const App = () => {
   SystemNavigationBar.setNavigationColor('#0066B3');   
-    return (
+    return ( 
         <NavigationContainer>
           <AppNavigation />
         </NavigationContainer>
