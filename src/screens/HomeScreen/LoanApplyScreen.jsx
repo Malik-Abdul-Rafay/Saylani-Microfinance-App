@@ -98,7 +98,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
             <Text style={styles.loanText}>Your approved loan amount Up to</Text>
             <Text style={styles.loanAmount}>RS. {loanAmount}/-</Text>
             <Slider
-              style={styles.slider}
+              style={styles.slider} 
               minimumValue={5000} 
               maximumValue={categoryDetail.max_loan} 
               step={500} 
