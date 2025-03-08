@@ -108,7 +108,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
               maximumTrackTintColor="gray"
               thumbTintColor="#0066B3"
               thumbStyle={styles.thumb} 
-            />
+            /> 
           </View>
 
           <View style={styles.inputContainer}>
