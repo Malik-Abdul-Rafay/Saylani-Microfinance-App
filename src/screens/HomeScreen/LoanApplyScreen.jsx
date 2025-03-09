@@ -103,7 +103,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
               maximumValue={categoryDetail.max_loan}      
               step={500}      
               value={debouncedLoanAmount}     
-              onValueChange={setLoanAmount} 
+              onValueChange={setLoanAmount}  
               minimumTrackTintColor="#0066B3"
               maximumTrackTintColor="gray"
               thumbTintColor="#0066B3" 
