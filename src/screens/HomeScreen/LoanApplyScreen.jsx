@@ -100,7 +100,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
             <Slider 
               style={styles.slider}  
               minimumValue={5000}   
-              maximumValue={categoryDetail.max_loan}   
+              maximumValue={categoryDetail.max_loan}    
               step={500}   
               value={debouncedLoanAmount}    
               onValueChange={setLoanAmount} 
