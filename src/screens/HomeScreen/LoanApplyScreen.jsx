@@ -94,7 +94,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
         <View style={styles.card}>
           <Text style={styles.title}>{categoryDetail.name}</Text>
  
-          <View style={styles.loanBox}>
+          <View style={styles.loanBox}> 
             <Text style={styles.loanText}>Your approved loan amount Up to</Text>
             <Text style={styles.loanAmount}>RS. {loanAmount}/-</Text> 
             <Slider 
