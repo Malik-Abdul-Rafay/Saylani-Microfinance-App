@@ -99,7 +99,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
             <Text style={styles.loanAmount}>RS. {loanAmount}/-</Text> 
             <Slider 
               style={styles.slider}   
-              minimumValue={5000}   
+              minimumValue={5000}    
               maximumValue={categoryDetail.max_loan}    
               step={500}   
               value={debouncedLoanAmount}    
