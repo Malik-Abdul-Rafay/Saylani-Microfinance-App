@@ -93,7 +93,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.card}>
           <Text style={styles.title}>{categoryDetail.name}</Text>
-
+ 
           <View style={styles.loanBox}>
             <Text style={styles.loanText}>Your approved loan amount Up to</Text>
             <Text style={styles.loanAmount}>RS. {loanAmount}/-</Text> 
