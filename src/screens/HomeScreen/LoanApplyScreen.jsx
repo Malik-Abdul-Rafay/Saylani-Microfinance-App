@@ -111,7 +111,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
             />  
           </View>  
 
-          <View style={styles.inputContainer}>
+          <View style={styles.inputContainer}> 
             <Text style={styles.label10}>Select Sub-Category</Text>
             <View style={styles.searchRow}>
               <TouchableOpacity
