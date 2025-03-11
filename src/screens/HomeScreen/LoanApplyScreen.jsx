@@ -109,7 +109,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
               thumbTintColor="#0066B3"  
               thumbStyle={styles.thumb}  
             />  
-          </View>
+          </View> 
 
           <View style={styles.inputContainer}>
             <Text style={styles.label10}>Select Sub-Category</Text>
