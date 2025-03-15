@@ -107,7 +107,7 @@ const LoanApplyScreen = ({ route, navigation }) => {
               minimumTrackTintColor="#0066B3"        
               maximumTrackTintColor="gray"      
               thumbTintColor="#0066B3"       
-              thumbStyle={styles.thumb}      
+              thumbStyle={styles.thumb}       
             />    
           </View>    
  
